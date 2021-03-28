@@ -5,7 +5,7 @@ class Issues < Service # rubocop:todo Style/Documentation
 
   def self.show(user_token:)
     url = "#{ISSUES_URL}"
-    get(url: url, xheaders: { 'Authorization' => "token #{user_token}" })
+    get(url: url, xheaders: { 'Authorization' => "token #{user_token}" }, model_name: 'Issues')
   end
 
 end

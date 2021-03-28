@@ -14,14 +14,10 @@ class IssuesController < ApplicationController # rubocop:todo Style/Documentatio
     uc = UseCases::ShowIssues.new(user_token: user_token)
 
     return invalid_user_show(uc.errors) unless uc.valid?
-    Rails.logger.info 'paso 1'
     uc.execute
     
     return invalid_user_show(uc.errors) unless uc.success?
-    Rails.logger.info 'paso 2'
-    Rails.logger.info uc
-
-    @issues = uc.result
+    @issues = uc
   end
 
   def invalid_user_show(err)

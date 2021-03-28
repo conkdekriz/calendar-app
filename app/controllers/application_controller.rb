@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base # rubocop:todo Style/Docume
   protected
 
   def user_token
-    '7b2b45de6d9413d264e37353fc138e17e0ef49e3'
+    'd66ef2d0a3c47f1621065472bdac40b329b21344'
   end
 
 end

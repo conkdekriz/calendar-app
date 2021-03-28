@@ -7,13 +7,16 @@ class Service # rubocop:todo Style/Documentation
     request = Typhoeus::Request.new(url, method: :get, headers: headers, params: params)
     commit request
     processed_response = process request.response
-    processed_response
+    wrap processed_response, model_name: model_name
   end
 
   def self.wrap(coded_response, model_name: nil)
     response_type = coded_response[:code] > 300 ? 'error' : 'valid'
     klass_name = "#{response_type}_response"
     klass = klass_name.classify.constantize
+    Rails.logger.info "#{klass.new(coded_response, model_name: model_name)}"
+    Rails.logger.info 'model_name'
+    Rails.logger.info model_name
     klass.new(coded_response, model_name: model_name)
   end
 
@@ -41,10 +44,6 @@ class Service # rubocop:todo Style/Documentation
   def self.commit(request)
     hydra = Typhoeus::Hydra.hydra
     hydra.queue(request)
-    
-    Rails.logger.info request
-    Rails.logger.info hydra.run
-    
     hydra.run
   end
 end
