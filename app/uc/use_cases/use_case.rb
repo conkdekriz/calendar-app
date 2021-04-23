@@ -6,8 +6,8 @@ module UseCases
   # All use cases are initialized with the own specific parameters
   # and may return after beign invoked by the `execute` method.
   class UseCase
-    attr_reader :errors
-
+    attr_reader :errors, :result
+    
     def error(str)
       @errors << str
     end

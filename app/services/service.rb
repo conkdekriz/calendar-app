@@ -2,7 +2,7 @@
 
 class Service # rubocop:todo Style/Documentation
   
-   def self.get(url:, xheaders: nil, params: {}, model_name: nil)
+  def self.get(url:, xheaders: nil, params: {}, model_name: nil)
     headers = xheaders
     request = Typhoeus::Request.new(url, method: :get, headers: headers, params: params)
     commit request

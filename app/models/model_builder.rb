@@ -2,11 +2,12 @@
 
 class ModelBuilder
   def self.build(hash, name: nil)
-    klass_name = name || hash[:type].singularize.classify
+    klass_name = name
     id = hash['id']
     attrs = hash
     attrs['id'] = id.to_s
-    build_klass(klass_name, attrs) unless class_exists? klass_name
+    
+    build_klass(klass_name, attrs) unless klass_name.nil?
     klass = klass_name.constantize
     klass.new(attrs)
   end

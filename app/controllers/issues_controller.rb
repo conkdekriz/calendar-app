@@ -17,7 +17,7 @@ class IssuesController < ApplicationController # rubocop:todo Style/Documentatio
     uc.execute
     
     return invalid_user_show(uc.errors) unless uc.success?
-    @issues = uc
+    @issues = uc.result
   end
 
   def invalid_user_show(err)

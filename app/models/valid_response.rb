@@ -9,8 +9,10 @@ class ValidResponse < Response
 
   # Returns an Object or an Array of Objects resulting from a correct request to the API
   def body
+
     data = @hash[:body]
-    return @body = ModelBuilder.build(data, name: @model_name)
+    return @body = ModelBuilder.build(data, name: @model_name) unless data.is_a? Array
+
     @body = data.map do |datum|
       ModelBuilder.build(datum, name: @model_name)
     end
